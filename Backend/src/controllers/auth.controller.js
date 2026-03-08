@@ -93,8 +93,18 @@ async function loginUser(req, res) {
     dbUser,
   });
 }
+async function getUser(req, res) {
+  const userId = req.user.id;
 
+  const user = await userModel.findById(userId);
+
+  return res.status(200).json({
+    message: `Current logged in user is ${user.username}`,
+    user,
+  });
+}
 module.exports = {
   registerUser,
   loginUser,
+  getUser,
 };
