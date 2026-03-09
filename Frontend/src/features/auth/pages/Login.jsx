@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router";
 const Login = () => {
   function handleSubmit(e) {
@@ -7,7 +6,7 @@ const Login = () => {
   return (
     <main className="mx-auto my-4 px-4 py-4">
       <div
-        className="form-container mx-auto my-4 flex flex-col items-center justify-center max-w-[400px]  p-8 rounded-md"
+        className="form-container mx-auto my-4 flex flex-col items-center justify-center max-w-100  p-8 rounded-md"
         style={{ backgroundColor: "#232b2b" }}
       >
         <h1 className="text-center mb-5 font-bold text-3xl tracking-wide">
