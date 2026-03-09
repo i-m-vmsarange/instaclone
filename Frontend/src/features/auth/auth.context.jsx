@@ -14,8 +14,9 @@ export const AuthProvider = ({ children }) => {
       return response;
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
   const handleRegister = async (username, email, password) => {
     setLoading(true);
@@ -25,8 +26,9 @@ export const AuthProvider = ({ children }) => {
       return response;
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
