@@ -1,8 +1,27 @@
 import { Link } from "react-router";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth.context";
+import { useNavigate } from "react-router";
+
 const Login = () => {
-  function handleSubmit(e) {
-    e.preventDefault();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { loading, handleLogin } = useAuth();
+
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const response = await handleLogin(username, password);
+    console.log(response);
+    navigate("/");
+  }
+
   return (
     <main className="mx-auto my-4 px-4 py-4">
       <div
@@ -17,6 +36,9 @@ const Login = () => {
           className="flex flex-col items-center justify-center gap-4"
         >
           <input
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
             type="text"
             name="username"
             id="username"
@@ -24,6 +46,9 @@ const Login = () => {
             className="border border-amber-50 rounded-md px-2 py-1"
           />
           <input
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             type="password"
             name="password"
             id="password"

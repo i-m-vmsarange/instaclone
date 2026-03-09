@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
+import { useAuth } from "../hooks/useAuth.context";
+import { useNavigate } from "react-router";
+
 const Register = () => {
-  function handleRegister(e) {
-    e.preventDefault();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { loading, handleRegister } = useAuth();
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
+
+  async function submitHandler(e) {
+    e.preventDefault();
+    const response = await handleRegister(username, email, password);
+    console.log(response);
+    navigate("/login");
+  }
+
   return (
     <main className="mx-auto my-4 px-4 py-4">
       <div
@@ -14,10 +31,13 @@ const Register = () => {
           Register
         </h1>
         <form
-          onSubmit={handleRegister}
+          onSubmit={submitHandler}
           className="flex flex-col items-center justify-center gap-4"
         >
           <input
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
             type="text"
             name="username"
             id="username"
@@ -25,6 +45,9 @@ const Register = () => {
             className="border border-amber-50 rounded-md px-2 py-1"
           />
           <input
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             type="email"
             name="email"
             id="email"
@@ -32,6 +55,9 @@ const Register = () => {
             className="border border-amber-50 rounded-md px-2 py-1"
           />
           <input
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             type="password"
             name="password"
             id="password"
