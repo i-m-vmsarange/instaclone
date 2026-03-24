@@ -1,0 +1,30 @@
+const mongoose = require("mongoose");
+
+const postSchema = new mongoose.Schema(
+  {
+    caption: {
+      type: String,
+      required: [true, "Caption is required"],
+    },
+    imgUrl: {
+      type: String,
+      required: [true, "Img url is required"],
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: [true, "User Id is required"],
+    },
+    likeCount: {
+      type: Number,
+      default: 0,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+
+const postModel = mongoose.model("posts", postSchema);
+
+module.exports = postModel;

@@ -46,7 +46,12 @@ async function registerUser(req, res) {
 
   return res.status(201).json({
     message: "User registered successfully!!!",
-    user,
+    user: {
+      username: user.username,
+      email: user.email,
+      bio: user.bio,
+      profileImg: user.profileImg,
+    },
   });
 }
 async function loginUser(req, res) {
@@ -90,7 +95,12 @@ async function loginUser(req, res) {
   res.cookie("jwt_token", token);
   return res.status(200).json({
     message: "User logged in successfully!!!",
-    dbUser,
+    user: {
+      username: dbUser.username,
+      email: dbUser.email,
+      bio: dbUser.bio,
+      profileImg: dbUser.profileImg,
+    },
   });
 }
 async function getUser(req, res) {
