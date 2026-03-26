@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     const response = await handleLogin(username, password);
     console.log(response);
-    navigate("/");
+    navigate("/feed");
   }
 
   return (

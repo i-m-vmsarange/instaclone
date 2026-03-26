@@ -10,7 +10,7 @@ export async function login(username, password) {
     username,
     password,
   });
-
+  console.log(response);
   return response.data;
 }
 export async function register(username, email, password) {
